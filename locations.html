@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Location Selection | GameServerHub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('public/bg.webp'); /* Set the background image */
+      background-size: cover; /* Cover the entire page */
+      background-position: center; /* Center the background image */
+      background-attachment: fixed; /* Make the background fixed when scrolling */
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8); /* Light transparent background to make text more readable */
+      border-radius: 8px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    /* Region Sections */
+    .region {
+      margin-bottom: 20px;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .region h3 {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    /* Single Row Layout for Locations */
+    .location-row {
+      display: flex;
+      justify-content: space-between; /* Apply space between to evenly space out the items */
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    }
+
+    /* Location Elements */
+    .location-element {
+      display: flex;
+      align-items: center;
+      background-color: #ecf0f1;
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 22%; /* Adjust width to fit more in a row */
+      min-width: 120px;
+    }
+
+    .location-element:hover {
+      background-color: #dcdfe1;
+    }
+
+    .location-element.selected {
+      background-color: #16a085;
+      color: white;
+    }
+
+    .location-element img {
+      width: 20px;
+      height: 15px;
+      margin-right: 10px;
+    }
+
+    .location-name {
+      flex-grow: 1;
+    }
+
+    .checkmark {
+      margin-left: 10px;
+      font-size: 1.2rem;
+      display: none; /* Hide by default */
+    }
+
+    .location-element.selected .checkmark {
+      display: inline-block; /* Show checkmark for selected */
+    }
+
+    .location-element.disabled {
+      background-color: #bdc3c7;
+      cursor: not-allowed;
+    }
+
+    .location-element.disabled:hover {
+      background-color: #bdc3c7;
+    }
+
+    .location-element.disabled .location-name::after {
+      content: " (Coming soon)";
+      font-size: 0.9rem;
+      color: #e74c3c;
+    }
+
+    /* Next Button Section */
+    .next-section {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .next-button {
+      background-color: #2ecc71;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .next-button:hover {
+      background-color: #27ae60;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Select Your Server Location</h2>
+
+    <!-- EUROPE (EU) -->
+    <div class="region">
+      <h3>EUROPE (EU)</h3>
+      <div class="location-row">
+        <!-- Warsaw, POLAND (Enabled) -->
+        <div class="location-element" data-location="Warsaw, POLAND">
+          <img src="flags/pl.svg" alt="Poland Flag">
+          <div class="location-name">Warsaw, POLAND</div>
+          <span class="checkmark">&#10003;</span>
+        </div>
+        <!-- Other locations are disabled -->
+        <div class="location-element disabled" data-location="FFM / Eygelshoven, GER">
+          <img src="flags/de.svg" alt="Germany Flag">
+          <div class="location-name">FFM / Eygelshoven, GER</div>
+        </div>
+        <div class="location-element disabled" data-location="London, UK">
+          <img src="flags/gb.svg" alt="UK Flag">
+          <div class="location-name">London, UK</div>
+        </div>
+        <div class="location-element disabled" data-location="Paris, FR">
+          <img src="flags/fr.svg" alt="France Flag">
+          <div class="location-name">Paris, FR</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other regions (AMERICA, AUSTRALIA, ASIA) can be added here -->
+
+    <!-- Next Button Section -->
+    <div class="next-section">
+      <a href="initconfig.html">
+        <button class="next-button">Next</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Handle location selection
+    const locations = document.querySelectorAll('.location-element:not(.disabled)');
+    locations.forEach(location => {
+      location.addEventListener('click', () => {
+        // Remove checkmarks from all locations
+        locations.forEach(loc => {
+          loc.classList.remove('selected');
+        });
+
+        // Add checkmark to the selected location
+        location.classList.add('selected');
+
+        const selectedLocation = location.getAttribute('data-location');
+        localStorage.setItem('selectedLocation', selectedLocation); // Store selected location
+      });
+    });
+  </script>
+</body>
+</html>

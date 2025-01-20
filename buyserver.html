@@ -45,13 +45,7 @@
             color: #fff;
         }
 
-        .step .input-group {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .step select, .step input {
+        .input-field {
             padding: 12px;
             background-color: #292940;
             border: 1px solid #444;
@@ -128,27 +122,13 @@
             margin-bottom: 10px;
         }
 
-        .step-card select {
-            margin-bottom: 15px;
-        }
-
-        .step-card .price {
-            font-weight: bold;
-            color: #f5a623;
-            text-align: center;
-        }
-
         .additional-options {
             margin-top: 30px;
         }
 
-        .additional-options .option {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
         .additional-options label {
+            display: flex;
+            align-items: center;
             font-size: 1.1em;
             color: #fff;
         }
@@ -156,7 +136,6 @@
         .additional-options input[type="checkbox"] {
             margin-right: 10px;
         }
-
     </style>
 </head>
 <body>
@@ -167,7 +146,7 @@
             <div class="step-card">
                 <h3>Select Game</h3>
                 <p>Choose the game you want to host and the server price will adjust accordingly.</p>
-                <select id="game">
+                <select id="game" class="input-field">
                     <option value="minecraft">Minecraft - $5/GB</option>
                     <option value="csgo">CS:GO - $7/GB</option>
                     <option value="gtarp">GTA RP - $10/GB</option>
@@ -177,7 +156,7 @@
             <div class="step-card">
                 <h3>Select RAM</h3>
                 <p>Choose how much RAM you need. Prices scale accordingly.</p>
-                <select id="ram">
+                <select id="ram" class="input-field">
                     <option value="1">1 GB</option>
                     <option value="2">2 GB</option>
                     <option value="4">4 GB</option>
@@ -189,12 +168,12 @@
 
         <div class="step">
             <label for="storage">Storage Size (in GB):</label>
-            <input type="number" id="storage" placeholder="e.g., 50 GB" />
+            <input type="number" id="storage" class="input-field" placeholder="e.g., 50 GB" />
         </div>
 
         <div class="step">
             <label for="location">Server Location:</label>
-            <select id="location">
+            <select id="location" class="input-field">
                 <option value="na">North America</option>
                 <option value="eu">Europe</option>
                 <option value="asia">Asia</option>
@@ -203,16 +182,18 @@
 
         <div class="additional-options">
             <div class="option">
-                <label for="ddos">DDoS Protection</label>
-                <input type="checkbox" id="ddos" /> +$10/month
+                <label for="ddos">
+                    <input type="checkbox" id="ddos" class="input-field" /> DDoS Protection (+$10/month)
+                </label>
             </div>
             <div class="option">
-                <label for="backup">Server Backup</label>
-                <input type="checkbox" id="backup" /> +$5/month
+                <label for="backup">
+                    <input type="checkbox" id="backup" class="input-field" /> Server Backup (+$5/month)
+                </label>
             </div>
             <div class="option">
                 <label for="os">Operating System</label>
-                <select id="os">
+                <select id="os" class="input-field">
                     <option value="ubuntu">Ubuntu - Free</option>
                     <option value="windows">Windows Server - $15/month</option>
                     <option value="centos">CentOS - Free</option>
@@ -220,7 +201,7 @@
             </div>
             <div class="option">
                 <label for="panel">Control Panel</label>
-                <select id="panel">
+                <select id="panel" class="input-field">
                     <option value="cPanel">cPanel - $20/month</option>
                     <option value="plesk">Plesk - $15/month</option>
                     <option value="none">None - Free</option>

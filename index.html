@@ -1,63 +1,162 @@
-<header>
-    <img src="game2.png" alt="GameServerHub Logo" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameServerHub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      overflow: auto;
+    }
+
+    .modal-content {
+      background-color: #1e1e2e;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      color: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .close-button {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+      color: #f5a623;
+      text-decoration: none;
+    }
+
+    .game-selection {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .game-card {
+      background-color: #292940;
+      border-radius: 12px;
+      padding: 15px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .game-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .game-card h3 {
+      color: #f5a623;
+      margin-bottom: 10px;
+    }
+
+    .game-card p {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <img src="public/game2.png" alt="GameServerHub Logo" />
     <nav>
       <a href="#">Home</a>
       <a href="#services">Services</a>
       <a href="#locations">Locations</a>
       <a href="#contact">Contact</a>
-      <link rel="stylesheet" href="styles.css" />
     </nav>
   </header>
-  
+
   <div class="hero">
     <h2>Host Your Games with Ease</h2>
     <p>
       Get reliable and affordable game server hosting for all your favorite
       games. Start now and enjoy a seamless gaming experience!
     </p>
-    <a href="buyserver.html"><button class="cta-button">Get Your Server Now</button></a>
+    <button class="cta-button" id="open-modal">Get Your Server Now</button>
   </div>
-  
-  <section class="services" id="services">
-    <h2>Available Games!</h2>
-    <div class="section-buttons">
-      <div class="button-item">
-        <h3>Minecraft Hosting</h3>
-        <p>From $5/month</p>
-      </div>
-      <div class="button-item">
-        <h3>CS:GO Hosting</h3>
-        <p>From $8/month</p>
-      </div>
-      <div class="button-item">
-        <h3>GTA RP Hosting</h3>
-        <p>From $10/month</p>
-      </div>
-    </div>
-  </section>
-  
-  <section class="locations" id="locations">
-    <h2>Server Locations</h2>
-    <div class="section-buttons">
-      <div class="button-item">
-        <h3>North America</h3>
-        <p>Low latency in the USA & Canada</p>
-      </div>
-      <div class="button-item">
-        <h3>Europe</h3>
-        <p>Fast speeds across the EU</p>
-      </div>
-      <div class="button-item">
-        <h3>Asia</h3>
-        <p>Optimized servers in Asia</p>
-      </div>
-      <div class="button-item">
-        <h3>Australia</h3>
-        <p>Best performance Down Under</p>
+
+  <!-- Modal -->
+  <div id="game-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="close-modal">&times;</span>
+      <div class="game-selection">
+        <div class="game-card" data-game="Minecraft">
+          <img src="public/minecraft.png" alt="Minecraft" />
+          <h3>Minecraft</h3>
+          <p>Host your block-building adventures starting at $5/month.</p>
+        </div>
+        <div class="game-card" data-game="Project Zomboid">
+          <img src="public/zomboid.png" alt="Project Zomboid" />
+          <h3>Project Zomboid</h3>
+          <p>Survive the zombie apocalypse starting at $8/month.</p>
+        </div>
+        <div class="game-card" data-game="GTA RP">
+          <img src="public/gta.png" alt="GTA RP" />
+          <h3>GTA RP</h3>
+          <p>Roleplay in a world of possibilities starting at $10/month.</p>
+        </div>
       </div>
     </div>
-  </section>
-  
-  <footer>
-    <p>&copy; 2025 GameServerHub. All Rights Reserved.</p>
-  </footer>
+  </div>
+
+  <script>
+    // Modal functionality
+    const modal = document.getElementById("game-modal");
+    const openModalButton = document.getElementById("open-modal");
+    const closeModalButton = document.getElementById("close-modal");
+    const gameCards = document.querySelectorAll(".game-card");
+
+    openModalButton.addEventListener("click", () => {
+      modal.style.display = "block";
+    });
+
+    closeModalButton.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+
+    // Handle game selection
+    gameCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const selectedGame = card.getAttribute("data-game");
+        localStorage.setItem("selectedGame", selectedGame); // Store game choice
+        modal.style.display = "none"; // Close modal
+        window.location.href = "locations.html"; // Redirect to locations page
+      });
+    });
+  </script>
+</body>
+</html>
