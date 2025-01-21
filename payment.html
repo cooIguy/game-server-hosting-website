@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment | GameServerHub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: url('public/pay-bg.webp') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      transition: opacity 0.5s ease-in-out;
+      opacity: 0; /* Initially hidden */
+    }
+
+    body.loaded {
+      opacity: 1; /* Show body after page load */
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2ecc71;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    .summary-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .summary-card h3 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .summary-total {
+      border-top: 2px solid rgba(255, 255, 255, 0.3);
+      padding-top: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    /* Payment Button */
+    .pay-button-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .pay-button {
+      background-color: #2ecc71;
+      color: white;
+      padding: 14px 24px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .pay-button:hover {
+      background-color: #27ae60;
+    }
+
+    .pay-button:focus {
+      outline: none;
+      box-shadow: 0 0 10px #2ecc71;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Payment Summary</h2>
+
+    <!-- Summary Section -->
+    <div class="summary-card">
+      <h3>Your Order</h3>
+      <div class="summary-item">
+        <span>Game Server</span>
+        <span id="gameSummary">-</span>
+      </div>
+      <div class="summary-item">
+        <span>Gameserver Slots</span>
+        <span id="slotSummary">-</span>
+      </div>
+      <div class="summary-item">
+        <span>RAM Boost</span>
+        <span id="ramSummary">-</span>
+      </div>
+      <div class="summary-item">
+        <span>Disk Space</span>
+        <span id="diskSummary">-</span>
+      </div>
+      <div class="summary-total">
+        Total: <span id="totalPrice">€0.00</span>
+      </div>
+    </div>
+
+    <!-- Pay Button -->
+    <div class="pay-button-container">
+      <button class="pay-button" onclick="handlePayment()">Pay Now</button>
+    </div>
+  </div>
+
+  <script>
+    // Prices
+    const pricePerSlot = 0.50; // € per slot
+    const pricePerGBRam = 1.00; // € per GB RAM
+    const pricePerGBDisk = 0.10; // € per GB Disk
+
+    // Fetch stored data
+    const selectedGame = localStorage.getItem("selectedGame") || "Unknown Game";
+    const slots = localStorage.getItem("slots") || 0;
+    const ram = localStorage.getItem("ram") || 0;
+    const disk = localStorage.getItem("disk") || 0;
+
+    // Calculate total price
+    const totalPrice =
+      slots * pricePerSlot + ram * pricePerGBRam + disk * pricePerGBDisk;
+
+    // Update UI with dynamic data
+    document.getElementById("gameSummary").innerText = selectedGame;
+    document.getElementById("slotSummary").innerText = `${slots} slots`;
+    document.getElementById("ramSummary").innerText = `${ram} GB`;
+    document.getElementById("diskSummary").innerText = `${disk} GB`;
+    document.getElementById("totalPrice").innerText = `€${totalPrice.toFixed(2)}`;
+
+    // Fade-out effect before navigating to another page
+    function navigateWithTransition(url) {
+      document.body.classList.add('page-transition');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 500); // Adjust this time to match the transition duration
+    }
+
+    // Handle payment
+    function handlePayment() {
+      navigateWithTransition("confirmation.html"); // Redirect with transition
+    }
+      // Fade-in effect on page load
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
+
+  // Fade-out effect before navigating to another page
+  function navigateWithTransition(url) {
+    document.body.classList.add('page-transition');
+    setTimeout(() => {
+      window.location.href = url;
+    }, 500); // Adjust this time to match the transition duration
+  }
+  </script>
+</body>
+</html>

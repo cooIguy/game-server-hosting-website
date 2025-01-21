@@ -6,6 +6,71 @@
   <title>GameServerHub</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
+    /* Trust Badges Section Layout */
+    .trust-badges-section {
+      display: flex;
+      justify-content: space-around;  /* Distribute the items evenly */
+      align-items: center;  /* Center items vertically */
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+    .badge-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 30%;  /* Each box takes 30% of the container */
+      text-align: center;
+      gap: 10px;  /* Space between the image and the text */
+    }
+
+    .badge {
+      background-color: #292940;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .badge img {
+      width: 80px;  /* Size of images */
+      height: auto;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      margin-bottom: 10px;  /* Space between image and text */
+    }
+
+    .badge img:hover {
+      opacity: 1;
+    }
+
+    .badge p {
+      color: white;
+      font-size: 14px;
+      font-family: 'Arial', sans-serif; /* Ensure using the same font as the rest of the page */
+      line-height: 1.4;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Hover Effect for Box */
+    .badge:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .badge-info p {
+      color: white;
+      font-size: 14px;
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+
     /* Modal styles */
     .modal {
       display: none;
@@ -81,6 +146,74 @@
     .game-card p {
       color: white;
     }
+
+    /* Additional Styles for User Trust */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('public/hero-bg.jpg') no-repeat center center;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .cta-button {
+      background-color: #f5a623;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #f39c12;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .feature-card {
+      background-color: #292940;
+      padding: 25px;
+      width: 30%;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .feature-card h3 {
+      color: #f5a623;
+    }
+
+    .testimonials {
+      background-color: #1e1e2e;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .testimonial {
+      margin: 0 20px;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .testimonial .customer-name {
+      font-weight: bold;
+      color: #f5a623;
+    }
+
+    /* Update for all Trust Badges */
+    .trust-badges .badge img {
+      width: 80%; /* Increased width for all badges */
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -94,6 +227,7 @@
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <div class="hero">
     <h2>Host Your Games with Ease</h2>
     <p>
@@ -102,6 +236,59 @@
     </p>
     <button class="cta-button" id="open-modal">Get Your Server Now</button>
   </div>
+
+  <!-- Features Section -->
+  <div class="features">
+    <div class="feature-card">
+      <h3>Fast Performance</h3>
+      <p>Enjoy low-latency servers with high-performance hardware for the best gaming experience.</p>
+    </div>
+    <div class="feature-card">
+      <h3>24/7 Support</h3>
+      <p>Our support team is always available to assist you, ensuring your servers are always online.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Easy Setup</h3>
+      <p>Get your server up and running in no time with our simple and intuitive setup process.</p>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial">
+      <p>"GameServerHub is fantastic! The server setup was quick and the performance is top-notch. Highly recommended!"</p>
+      <span class="customer-name">- John Doe</span>
+    </div>
+    <div class="testimonial">
+      <p>"I've been hosting my game servers here for months. Great value for money and amazing customer service."</p>
+      <span class="customer-name">- Jane Smith</span>
+    </div>
+  </div>
+
+<!-- Trust Badges Section -->
+<div class="trust-badges-section">
+  <div class="badge-info">
+    <div class="badge">
+      <img src="public/uptime.png" alt="SSL Secure" />
+    </div>
+    <p>SSL Secure: Your data is protected with SSL encryption, ensuring secure communication.</p>
+  </div>
+  <div class="badge-info">
+    <div class="badge">
+      <img src="public/24-7-support.png" alt="24/7 Support" />
+    </div>
+    <p>24/7 Support: Our team is available anytime to assist with any issues, ensuring a smooth experience.</p>
+  </div>
+  <div class="badge-info">
+    <div class="badge">
+      <img src="public/payment-secure.png" alt="Secure Payments" />
+    </div>
+    <p>Secure Payments: We provide a safe and encrypted payment gateway for all transactions.</p>
+  </div>
+</div>
+
+
 
   <!-- Modal -->
   <div id="game-modal" class="modal">
@@ -157,6 +344,19 @@
         window.location.href = "locations.html"; // Redirect to locations page
       });
     });
+
+    // Fade-in effect on page load
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
+    // Fade-out effect before navigating to another page
+    function navigateWithTransition(url) {
+      document.body.classList.add('page-transition');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 500); // Adjust this time to match the transition duration
+    }
   </script>
 </body>
 </html>

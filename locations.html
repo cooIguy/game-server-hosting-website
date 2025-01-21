@@ -9,7 +9,7 @@
     /* General Styles */
     body {
       font-family: Arial, sans-serif;
-      background-image: url('public/bg.webp'); /* Set the background image */
+      background-image: url('public/loc-bg.webp'); /* Set the background image */
       background-size: cover; /* Cover the entire page */
       background-position: center; /* Center the background image */
       background-attachment: fixed; /* Make the background fixed when scrolling */
@@ -192,6 +192,18 @@
         localStorage.setItem('selectedLocation', selectedLocation); // Store selected location
       });
     });
+      // Fade-in effect on page load
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
+
+  // Fade-out effect before navigating to another page
+  function navigateWithTransition(url) {
+    document.body.classList.add('page-transition');
+    setTimeout(() => {
+      window.location.href = url;
+    }, 500); // Adjust this time to match the transition duration
+  }
   </script>
 </body>
 </html>

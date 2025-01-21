@@ -5,8 +5,19 @@ body {
   color: #eaeaea;
   margin: 0;
   line-height: 1.6;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0; /* Initially hidden */
 }
 
+body.loaded {
+  opacity: 1; /* Show body after page load */
+}
+
+/* Add this to handle fade-out transition when navigating */
+.page-transition {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
 /* Header */
 .header {
   display: flex;
