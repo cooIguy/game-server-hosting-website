@@ -16,6 +16,9 @@
       color: #333;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* Ensure the body takes full viewport height */
     }
 
     .container {
@@ -24,6 +27,7 @@
       padding: 20px;
       background-color: rgba(255, 255, 255, 0.8); /* Light transparent background to make text more readable */
       border-radius: 8px;
+      flex-grow: 1; /* Ensure the content container takes the remaining space */
     }
 
     h2 {
@@ -39,12 +43,28 @@
       padding: 15px;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: relative; /* Allow positioning of the arrow inside this container */
     }
 
     .region h3 {
       font-size: 1.3rem;
       color: #2c3e50;
       margin-bottom: 10px;
+    }
+
+    /* Back Arrow */
+    .back-arrow {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      color: #2ecc71; /* Modern green color */
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .back-arrow:hover {
+      color: #27ae60; /* Darker shade when hovered */
     }
 
     /* Single Row Layout for Locations */
@@ -127,6 +147,14 @@
       border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin: 0 10px;
+      pointer-events: none; /* Disabled by default */
+      opacity: 0.5; /* Visually dimmed when disabled */
+    }
+
+    .next-button.enabled {
+      pointer-events: auto; /* Enable interaction */
+      opacity: 1; /* Full opacity when enabled */
     }
 
     .next-button:hover {
@@ -141,6 +169,7 @@
 
     <!-- EUROPE (EU) -->
     <div class="region">
+      <div class="back-arrow" onclick="window.history.back();">&#8592;</div> <!-- Left Arrow -->
       <h3>EUROPE (EU)</h3>
       <div class="location-row">
         <!-- Warsaw, POLAND (Enabled) -->
@@ -170,7 +199,7 @@
     <!-- Next Button Section -->
     <div class="next-section">
       <a href="initconfig.html">
-        <button class="next-button">Next</button>
+        <button class="next-button" id="next-button" disabled>Next</button>
       </a>
     </div>
   </div>
@@ -178,33 +207,60 @@
   <script>
     // Handle location selection
     const locations = document.querySelectorAll('.location-element:not(.disabled)');
+    const nextButton = document.getElementById('next-button');
+
     locations.forEach(location => {
       location.addEventListener('click', () => {
-        // Remove checkmarks from all locations
-        locations.forEach(loc => {
-          loc.classList.remove('selected');
-        });
+        // If the location is already selected, deselect it
+        if (location.classList.contains('selected')) {
+          location.classList.remove('selected');
+          localStorage.removeItem('selectedLocation'); // Remove from localStorage
+        } else {
+          // Remove checkmarks from all locations
+          locations.forEach(loc => {
+            loc.classList.remove('selected');
+          });
 
-        // Add checkmark to the selected location
-        location.classList.add('selected');
+          // Add checkmark to the selected location
+          location.classList.add('selected');
 
-        const selectedLocation = location.getAttribute('data-location');
-        localStorage.setItem('selectedLocation', selectedLocation); // Store selected location
+          const selectedLocation = location.getAttribute('data-location');
+          localStorage.setItem('selectedLocation', selectedLocation); // Store selected location
+        }
+
+        // Enable/Disable the Next button based on selection
+        updateNextButtonState();
       });
     });
-      // Fade-in effect on page load
-  window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-  });
 
-  // Fade-out effect before navigating to another page
-  function navigateWithTransition(url) {
-    document.body.classList.add('page-transition');
-    setTimeout(() => {
-      window.location.href = url;
-    }, 500); // Adjust this time to match the transition duration
-  }
-  
+    function updateNextButtonState() {
+      const selectedLocation = localStorage.getItem('selectedLocation');
+      if (selectedLocation) {
+        nextButton.disabled = false; // Enable the button
+        nextButton.classList.add('enabled');
+        nextButton.style.pointerEvents = "auto"; // Allow clicking when enabled
+      } else {
+        nextButton.disabled = true; // Disable the button
+        nextButton.classList.remove('enabled');
+        nextButton.style.pointerEvents = "none"; // Prevent clicking when disabled
+      }
+    }
+
+    // Initially check if a location is selected from localStorage
+    updateNextButtonState();
+
+    // Fade-in effect on page load
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
+    // Fade-out effect before navigating to another page
+    function navigateWithTransition(url) {
+      document.body.classList.add('page-transition');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 500); // Adjust this time to match the transition duration
+    }
   </script>
   <script src="inject-header-footer.js" defer></script>
 
