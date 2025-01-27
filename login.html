@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <script src="inject-header-footer.js" defer></script>
+  <!-- Include the Google API script -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: flex-start;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      margin: 60px auto;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #292940;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .google-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .google-btn:hover {
+      background-color: #357ae8;
+    }
+
+    /* Footer Styling */
+    .footer {
+      background-color: #292940;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: relative;
+      width: 100%;
+      bottom: 0;
+      margin-top: auto; /* Push footer to the bottom */
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #f5a623;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #f39c12;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login with Google</h1>
+    <!-- Google Login Button -->
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+  </div>
+
+  <script>
+    // Callback function when user successfully logs in
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log("User Signed In: ");
+      console.log("Name: " + profile.getName());
+      console.log("Email: " + profile.getEmail());
+      console.log("ID: " + profile.getId());
+
+      // Redirect to another page after successful login
+      // For now, you can redirect to a home page
+      window.location.href = "index.html";  // Change this URL as needed
+    }
+
+    // Initialize the Google API client
+    function start() {
+      gapi.load('auth2', function() {
+        gapi.auth2.init({
+          client_id: 'YOUR_GOOGLE_CLIENT_ID', // Replace with your Google client ID
+        });
+      });
+    }
+
+    // Run the start function once the API script is loaded
+    start();
+  </script>
+
+</body>
+</html>

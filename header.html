@@ -1,0 +1,84 @@
+<header class="game-header">
+    <a href="index.html">
+      <img src="public/game2.png" alt="GameServerHub Logo" class="game-logo" />
+    </a>
+    <nav class="game-nav">
+      <a href="#services" class="game-nav-link">Services</a>
+      <a href="#locations" class="game-nav-link">Locations</a>
+      <a href="contact.html" class="game-nav-link">Contact</a>
+      <a href="login.html" class="game-nav-link login-link">Login</a> <!-- Link to login page -->
+    </nav>
+</header>
+
+<style>
+  /* Header Styling */
+  .game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #292940; /* Dark background */
+    padding: 20px 80px; /* Increased horizontal padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .game-logo {
+    max-width: 200px; /* Increased logo size */
+    transition: transform 0.3s ease;
+  }
+
+  .game-logo:hover {
+    transform: scale(1.1);
+  }
+
+  .game-nav {
+    display: flex;
+    gap: 40px; /* Increased gap between navigation links */
+  }
+
+  .game-nav-link {
+    color: #f5a623; /* Light orange color */
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px; /* Space for underline */
+    transition: color 0.3s ease;
+  }
+
+  .game-nav-link:hover {
+    color: #f39c12; /* Slightly darker yellow/orange */
+  }
+
+  /* Add underline effect for links on hover, starting from the center */
+  .game-nav-link::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #f39c12;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+
+  .game-nav-link:hover::before {
+    width: 100%;
+  }
+
+  .login-link {
+    font-weight: bold; /* Make the Login link stand out */
+    color: #f5a623; /* Light orange color */
+    background-color: #292940; /* Same dark background as header */
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: 1px solid #f5a623; /* Border with same color as link */
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .login-link:hover {
+    background-color: #f5a623; /* Highlight on hover */
+    color: #292940; /* Dark text color on hover */
+  }
+</style>

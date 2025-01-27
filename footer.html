@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Footer Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Footer Section Styling */
+    .footer {
+      background-color: #292940; /* Dark background color */
+      color: white;
+      width: 100%;
+      padding: 40px 20px;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
+      position: relative;
+      font-family: 'Poppins', sans-serif; /* Modern font */
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+
+    .footer-link {
+      color: #f5a623;
+      font-size: 16px;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 5px; /* Space for underline */
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: #f39c12;
+    }
+
+    /* Add underline effect for links on hover, starting from the center */
+    .footer-link::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: #f39c12;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+
+    .footer-link:hover::before {
+      width: 100%;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .social-icon img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icon img:hover {
+      transform: scale(1.2);
+    }
+
+    .footer-bottom {
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    .footer-bottom p {
+      margin: 5px 0;
+    }
+
+    .footer-bottom p:first-child {
+      color: #f5a623;
+    }
+
+    .footer-bottom p:last-child {
+      font-style: italic;
+      color: #f39c12;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Footer Section -->
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="contact.html" class="footer-link">Contact</a>
+        <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+        <a href="terms-of-service.html" class="footer-link">Terms of Service</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="social-icon"><img src="public/facebook-icon.png" alt="Facebook" /></a>
+        <a href="#" class="social-icon"><img src="public/twitter-icon.webp" alt="Twitter" /></a>
+        <a href="#" class="social-icon"><img src="public/instagram-icon.png" alt="Instagram" /></a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GameServerHub. All rights reserved.</p>
+        <p>Made with ❤️ by the GameServerHub team</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
