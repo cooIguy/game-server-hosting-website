@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +9,10 @@
   <style>
     /* Adjust the body padding */
     body {
-      padding-bottom: 1px; /* Adjusted for minimal space */
+      padding-bottom: 1px;
+      /* Adjusted for minimal space */
     }
-  
+
     .testimonial-container {
       display: flex;
       justify-content: center;
@@ -34,33 +36,48 @@
     .testimonial {
       background-color: rgba(41, 41, 64, 0.8);
       padding: 25px;
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      /* Adjusted width for better readability */
+      min-height: 200px;
+      /* Ensure a consistent height */
+      max-height: 300px;
+      /* Cap the height to prevent oversized testimonials */
       margin: 0 10px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       color: white;
       font-size: 16px;
-      transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
-      word-wrap: break-word;
-      white-space: normal;
+      line-height: 1.5;
+      /* Improved readability with better spacing */
       overflow: hidden;
+      /* Hide any text that overflows */
+      text-overflow: ellipsis;
+      /* Adds "..." to truncated text */
+      word-break: break-word;
+      /* Ensures long words break to the next line */
+      white-space: normal;
+      /* Text wraps naturally */
       position: relative;
       opacity: 1;
-      filter: blur(8px); /* Apply blur by default */
+      filter: blur(8px);
+      /* Apply blur by default */
       transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
-      transform: scale(0.8); /* Make inactive reviews smaller */
+      transform: scale(0.8);
+      /* Make inactive reviews smaller */
       z-index: 1;
     }
 
     .testimonial.active {
-      filter: none; /* Remove blur */
-      transform: scale(1); /* Increase size for the active review */
-      z-index: 2; /* Ensure active review is on top */
+      filter: none;
+      /* Remove blur */
+      transform: scale(1);
+      /* Increase size for the active review */
+      z-index: 2;
+      /* Ensure active review is on top */
+      max-height: none;
+      /* Allow active testimonials to expand naturally */
     }
 
-
-  
     /* Add a blur effect to the testimonial */
     .testimonial::before {
       content: '';
@@ -71,9 +88,10 @@
       bottom: 0;
       background: inherit;
       filter: blur(8px);
-      z-index: -1; /* Send the blur behind the content */
+      z-index: -1;
+      /* Send the blur behind the content */
     }
-  
+
 
     .testimonial .quote {
       font-style: italic;
@@ -107,14 +125,15 @@
 
     /* Footer Section Styling */
     .footer {
-      background-color: #292940; /* Dark background color */
+      background-color: #292940;
+      /* Dark background color */
       color: white;
       width: 100%;
       text-align: center;
       padding: 20px 0;
       box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
     }
-  
+
     /* Modal styles */
     .modal {
       display: none;
@@ -127,7 +146,7 @@
       background-color: rgba(0, 0, 0, 0.8);
       overflow: auto;
     }
-  
+
     .modal-content {
       background-color: #1e1e2e;
       margin: 5% auto;
@@ -138,7 +157,7 @@
       color: white;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     }
-  
+
     .close-button {
       color: white;
       float: right;
@@ -146,20 +165,20 @@
       font-weight: bold;
       cursor: pointer;
     }
-  
+
     .close-button:hover,
     .close-button:focus {
       color: #f5a623;
       text-decoration: none;
     }
-  
+
     .game-selection {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
     }
-  
+
     .game-card {
       background-color: #292940;
       border-radius: 12px;
@@ -170,27 +189,27 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
-  
+
     .game-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
     }
-  
+
     .game-card img {
       width: 100%;
       border-radius: 8px;
       margin-bottom: 10px;
     }
-  
+
     .game-card h3 {
       color: #f5a623;
       margin-bottom: 10px;
     }
-  
+
     .game-card p {
       color: white;
     }
-  
+
     /* Additional Styles for User Trust */
     .hero {
       text-align: center;
@@ -199,7 +218,7 @@
       background-size: cover;
       color: #fff;
     }
-  
+
     .cta-button {
       background-color: #f5a623;
       color: white;
@@ -210,11 +229,11 @@
       border-radius: 8px;
       transition: background-color 0.3s ease;
     }
-  
+
     .cta-button:hover {
       background-color: #f39c12;
     }
-  
+
     /* Features Section Layout */
     .features {
       display: flex;
@@ -222,7 +241,7 @@
       margin-top: 50px;
       text-align: center;
     }
-  
+
     .feature-card {
       background-color: #292940;
       padding: 25px;
@@ -230,28 +249,31 @@
       border-radius: 8px;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
       display: flex;
-      flex-direction: column; /* Align items vertically */
+      flex-direction: column;
+      /* Align items vertically */
       justify-content: center;
       align-items: center;
     }
-  
+
     .feature-card img {
-      width: 80px;  /* Size of images */
+      width: 80px;
+      /* Size of images */
       height: auto;
-      margin-bottom: 15px; /* Space between image and text */
+      margin-bottom: 15px;
+      /* Space between image and text */
       opacity: 0.8;
       transition: opacity 0.3s ease;
     }
-  
+
     .feature-card img:hover {
       opacity: 1;
     }
-  
+
     .feature-card h3 {
       color: #f5a623;
       margin-bottom: 10px;
     }
-  
+
     .feature-card p {
       color: white;
       font-size: 14px;
@@ -260,28 +282,29 @@
       margin: 0;
       padding: 0;
     }
-  
+
     .testimonials {
       background-color: #1e1e2e;
       padding: 50px 20px;
       text-align: center;
     }
-  
+
     .testimonial {
       margin: 0 20px;
       font-size: 18px;
       color: #fff;
     }
-  
+
     .testimonial .customer-name {
       font-weight: bold;
       color: #f5a623;
     }
   </style>
-  
-  
-  
+
+
+
 </head>
+
 <body>
 
   <!-- Hero Section -->
@@ -321,19 +344,22 @@
       <!-- Individual Testimonial -->
       <div class="testimonial active">
         <img src="public/customer1.jpg" alt="Customer 1" class="customer-img" />
-        <p class="quote">"GameServerHub is fantastic! The server setup was quick and the performance is top-notch. Highly recommended!"</p>
+        <p class="quote">"GameServerHub is fantastic! The server setup was quick and the performance is top-notch.
+          Highly recommended!"</p>
         <span class="customer-name">- John Doe</span>
       </div>
 
       <div class="testimonial">
         <img src="public/customer2.jpg" alt="Customer 2" class="customer-img" />
-        <p class="quote">"I've been hosting my game servers here for months. Great value for money and amazing customer service."</p>
+        <p class="quote">"I've been hosting my game servers here for months. Great value for money and amazing customer
+          service."</p>
         <span class="customer-name">- Jane Smith</span>
       </div>
 
       <div class="testimonial">
         <img src="public/customer3.jpg" alt="Customer 3" class="customer-img" />
-        <p class="quote">"The support team is incredibly helpful! I had an issue with my server and it was resolved within minutes."</p>
+        <p class="quote">"The support team is incredibly helpful! I had an issue with my server and it was resolved
+          within minutes."</p>
         <span class="customer-name">- Mark Johnson</span>
       </div>
 
@@ -344,113 +370,114 @@
       </div>
     </div>
 
-  <!-- Modal -->
-  <div id="game-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-button" id="close-modal">&times;</span>
-      <div class="game-selection">
-        <div class="game-card" data-game="Minecraft">
-          <img src="public/minecraft.png" alt="Minecraft" />
-          <h3>Minecraft</h3>
-          <p>Host your block-building adventures starting at $5/month.</p>
-        </div>
-        <div class="game-card" data-game="Project Zomboid">
-          <img src="public/zomboid.png" alt="Project Zomboid" />
-          <h3>Project Zomboid</h3>
-          <p>Survive the zombie apocalypse starting at $8/month.</p>
-        </div>
-        <div class="game-card" data-game="GTA RP">
-          <img src="public/gta.png" alt="GTA RP" />
-          <h3>GTA RP</h3>
-          <p>Roleplay in a world of possibilities starting at $10/month.</p>
+    <!-- Modal -->
+    <div id="game-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" id="close-modal">&times;</span>
+        <div class="game-selection">
+          <div class="game-card" data-game="Minecraft">
+            <img src="public/minecraft.png" alt="Minecraft" />
+            <h3>Minecraft</h3>
+            <p>Host your block-building adventures starting at $5/month.</p>
+          </div>
+          <div class="game-card" data-game="Project Zomboid">
+            <img src="public/zomboid.png" alt="Project Zomboid" />
+            <h3>Project Zomboid</h3>
+            <p>Survive the zombie apocalypse starting at $8/month.</p>
+          </div>
+          <div class="game-card" data-game="GTA RP">
+            <img src="public/gta.png" alt="GTA RP" />
+            <h3>GTA RP</h3>
+            <p>Roleplay in a world of possibilities starting at $10/month.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    // Modal functionality
-    const modal = document.getElementById("game-modal");
-    const openModalButton = document.getElementById("open-modal");
-    const closeModalButton = document.getElementById("close-modal");
-    const gameCards = document.querySelectorAll(".game-card");
-  
-    openModalButton.addEventListener("click", () => {
-      modal.style.display = "block";
-    });
-  
-    closeModalButton.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-  
-    window.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-  
-    // Handle game selection
-    gameCards.forEach((card) => {
-      card.addEventListener("click", () => {
-        const selectedGame = card.getAttribute("data-game");
-        localStorage.setItem("selectedGame", selectedGame); // Store game choice
-        modal.style.display = "none"; // Close modal
-        window.location.href = "locations.html"; // Redirect to locations page
+    <script>
+      // Modal functionality
+      const modal = document.getElementById("game-modal");
+      const openModalButton = document.getElementById("open-modal");
+      const closeModalButton = document.getElementById("close-modal");
+      const gameCards = document.querySelectorAll(".game-card");
+
+      openModalButton.addEventListener("click", () => {
+        modal.style.display = "block";
       });
-    });
-  
-    // Fade-in effect on page load
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-    });
-  
-    // Fade-out effect before navigating to another page
-    function navigateWithTransition(url) {
-      document.body.classList.add('page-transition');
-      setTimeout(() => {
-        window.location.href = url;
-      }, 500); // Adjust this time to match the transition duration
-    }
-  
-    // Review Navigation (automatic switching every 10 seconds)
-    document.addEventListener("DOMContentLoaded", () => {
-      const testimonials = document.querySelectorAll('.testimonial');
-      let currentReviewIndex = 0;
-  
-      // Function to show the current review with the blur effect
-      function showReview(index) {
-        const totalReviews = testimonials.length;
-  
-        testimonials.forEach((testimonial, i) => {
-          // Reset all reviews to be blurred
-          testimonial.classList.remove('active');
-          testimonial.style.filter = 'blur(8px)';
-          testimonial.style.opacity = '0.5';
-          testimonial.style.transform = 'scale(0.8)';
-  
-          // If this is the current review, make it active (clear blur, full opacity)
-          if (i === index) {
-            testimonial.classList.add('active');
-            testimonial.style.filter = 'none';
-            testimonial.style.opacity = '1';
-            testimonial.style.transform = 'scale(1)';
-          }
+
+      closeModalButton.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+
+      // Handle game selection
+      gameCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const selectedGame = card.getAttribute("data-game");
+          localStorage.setItem("selectedGame", selectedGame); // Store game choice
+          modal.style.display = "none"; // Close modal
+          window.location.href = "locations.html"; // Redirect to locations page
         });
+      });
+
+      // Fade-in effect on page load
+      window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+      });
+
+      // Fade-out effect before navigating to another page
+      function navigateWithTransition(url) {
+        document.body.classList.add('page-transition');
+        setTimeout(() => {
+          window.location.href = url;
+        }, 500); // Adjust this time to match the transition duration
       }
-  
-      // Function to change reviews automatically every 10 seconds
-      setInterval(() => {
-        currentReviewIndex = (currentReviewIndex + 1) % testimonials.length; // This ensures it loops back to the first review
+
+      // Review Navigation (automatic switching every 10 seconds)
+      document.addEventListener("DOMContentLoaded", () => {
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentReviewIndex = 0;
+
+        // Function to show the current review with the blur effect
+        function showReview(index) {
+          const totalReviews = testimonials.length;
+
+          testimonials.forEach((testimonial, i) => {
+            // Reset all reviews to be blurred
+            testimonial.classList.remove('active');
+            testimonial.style.filter = 'blur(8px)';
+            testimonial.style.opacity = '0.5';
+            testimonial.style.transform = 'scale(0.8)';
+
+            // If this is the current review, make it active (clear blur, full opacity)
+            if (i === index) {
+              testimonial.classList.add('active');
+              testimonial.style.filter = 'none';
+              testimonial.style.opacity = '1';
+              testimonial.style.transform = 'scale(1)';
+            }
+          });
+        }
+
+        // Function to change reviews automatically every 10 seconds
+        setInterval(() => {
+          currentReviewIndex = (currentReviewIndex + 1) % testimonials.length; // This ensures it loops back to the first review
+          showReview(currentReviewIndex);
+        }, 10000); // Change reviews every 10 seconds
+
+        // Initialize with the first review being in focus
         showReview(currentReviewIndex);
-      }, 10000); // Change reviews every 10 seconds
-  
-      // Initialize with the first review being in focus
-      showReview(currentReviewIndex);
-    });
-  </script>
-  
+      });
+    </script>
 
 
-  <script src="inject-header-footer.js" defer></script>
+
+    <script src="inject-header-footer.js" defer></script>
 </body>
+
 </html>
