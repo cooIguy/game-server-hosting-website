@@ -114,6 +114,10 @@
         <span id="gameSummary">-</span>
       </div>
       <div class="summary-item">
+        <span>Server Location</span>
+        <span id="locationSummary">-</span>
+      </div>      
+      <div class="summary-item">
         <span>Gameserver Slots</span>
         <span id="slotSummary">-</span>
       </div>
@@ -183,6 +187,12 @@
       window.location.href = url;
     }, 500); // Adjust this time to match the transition duration
   }
+  // Fetch selected location
+const selectedLocation = localStorage.getItem("selectedLocation") || "Not Selected";
+
+// Update UI with location data
+document.getElementById("locationSummary").innerText = selectedLocation;
+
   </script>
   
   <script src="inject-header-footer.js" defer></script>
