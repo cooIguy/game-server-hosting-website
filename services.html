@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services - GameServerHub</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Reuse the same color scheme and styling */
+    body {
+      padding-bottom: 1px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('public/hero-bg.jpg') no-repeat center center;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .cta-button {
+      background-color: #f5a623;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #f39c12;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .feature-card {
+      background-color: #292940;
+      padding: 25px;
+      width: 30%;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .feature-card img {
+      width: 80px;
+      height: auto;
+      margin-bottom: 15px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card img:hover {
+      opacity: 1;
+    }
+
+    .feature-card h3 {
+      color: #f5a623;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: white;
+      font-size: 14px;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.4;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Footer Section */
+    .footer {
+      background-color: #292940;
+      color: white;
+      width: 100%;
+      text-align: center;
+      padding: 20px 0;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h2>Our Premium Hosting Services</h2>
+    <p>We offer a range of reliable and affordable game server hosting solutions designed to enhance your gaming experience. Choose from a variety of services tailored to meet your needs.</p>
+    <button class="cta-button" id="get-started">Get Started Now</button>
+  </div>
+
+  <!-- Services Section -->
+  <div class="features">
+    <div class="feature-card">
+      <img src="public/uptime.png" alt="High Performance" />
+      <h3>High Performance Servers</h3>
+      <p>We provide top-tier performance with high-speed processors, low-latency connections, and the best hardware, ensuring your game runs smoothly at all times.</p>
+    </div>
+    <div class="feature-card">
+      <img src="public/24-7-support.png" alt="24/7 Support" />
+      <h3>24/7 Customer Support</h3>
+      <p>Our expert team is available around the clock to assist you. Whether it's troubleshooting or server configuration, we're always here to help.</p>
+    </div>
+    <div class="feature-card">
+      <img src="public/setup.png" alt="Easy Setup" />
+      <h3>Easy Server Setup</h3>
+      <p>Setting up your server has never been easier. With our streamlined process, you can get your game server up and running in minutes.</p>
+    </div>
+  </div>
+
+  <!-- Why Choose Us Section -->
+  <div class="features" style="margin-top: 50px;">
+    <div class="feature-card">
+      <img src="public/security.png" alt="Top-notch Security" />
+      <h3>Top-notch Security</h3>
+      <p>Your server's safety is our top priority. With advanced DDoS protection and regular security updates, your data and players are always protected.</p>
+    </div>
+    <div class="feature-card">
+      <img src="public/scalability.png" alt="Scalability" />
+      <h3>Scalable Plans</h3>
+      <p>Whether you're hosting a small server or running a large-scale community, we have flexible plans that grow with your needs. Scale up with ease as your player base increases.</p>
+    </div>
+    <div class="feature-card">
+      <img src="public/location.png" alt="Global Locations" />
+      <h3>Global Server Locations</h3>
+      <p>Choose from a variety of server locations around the world, ensuring low ping and fast connection times for players wherever they are.</p>
+    </div>
+  </div>
+
+  <!-- Testimonials Section -->
+  <div class="testimonials" style="background-color: #1e1e2e; padding: 50px 20px; text-align: center;">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-container">
+      <div class="testimonial active">
+        <img src="public/customer1.jpg" alt="Customer 1" class="customer-img" />
+        <p class="quote">"GameServerHub is fantastic! The server setup was quick, and the performance is top-notch. Highly recommended!"</p>
+        <span class="customer-name">- John Doe</span>
+      </div>
+      <div class="testimonial">
+        <img src="public/customer2.jpg" alt="Customer 2" class="customer-img" />
+        <p class="quote">"The customer service is outstanding. They solved all my issues within minutes. Great value for money!"</p>
+        <span class="customer-name">- Jane Smith</span>
+      </div>
+      <div class="testimonial">
+        <img src="public/customer3.jpg" alt="Customer 3" class="customer-img" />
+        <p class="quote">"I've been hosting my servers here for months, and I've had zero downtime. I trust them with all my gaming needs!"</p>
+        <span class="customer-name">- Mark Johnson</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <div class="footer">
+    <p>&copy; 2025 GameServerHub. All Rights Reserved.</p>
+  </div>
+
+  <script>
+    // Scroll to top functionality when the "Get Started" button is clicked
+    document.getElementById("get-started").addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+
+  <script src="inject-header-footer.js" defer></script>
+</body>
+
+</html>
