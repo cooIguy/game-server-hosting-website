@@ -177,11 +177,16 @@
       </div>
     </div>
 
+    <!-- Price Display -->
+    <div class="card">
+      <h3>Total Price</h3>
+      <div class="slider-label">Price: <span id="totalPrice">$0.00</span></div>
+    </div>
+
     <!-- Next Button -->
     <div class="next-button-container">
       <button class="next-button" id="nextButton">Proceed to Payment</button>
     </div>
-  </div>
 
   <script>
     // Update slots progress bar and value
@@ -240,7 +245,41 @@
       window.location.href = url;
     }, 500); // Adjust this time to match the transition duration
   }
-  </script>
+
+  function updatePrice() {
+    const slots = parseInt(slotSlider.value);
+    const ram = parseInt(ramSlider.value);
+    const disk = parseInt(diskSlider.value);
+
+    const slotPrice = slots * 0.10;
+    const ramPrice = ram * 2;
+    const diskPrice = disk * 0.50;
+    const total = slotPrice + ramPrice + diskPrice;
+
+    document.getElementById('totalPrice').innerText = `$${total.toFixed(2)}`;
+  }
+
+  // Attach updatePrice to input events
+  slotSlider.oninput = function () {
+    slotValue.innerHTML = this.value;
+    progressBar.style.width = (this.value / 500) * 100 + '%';
+    updatePrice();
+  };
+
+  ramSlider.oninput = function () {
+    ramValue.innerHTML = this.value;
+    updatePrice();
+  };
+
+  diskSlider.oninput = function () {
+    diskValue.innerHTML = this.value;
+    updatePrice();
+  };
+
+  // Initialize price on page load
+  updatePrice();
+</script>
+
   
 </body>
 </html>

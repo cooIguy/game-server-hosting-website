@@ -141,20 +141,21 @@
   </div>
 
   <script>
-    // Prices
-    const pricePerSlot = 0.50; // € per slot
-    const pricePerGBRam = 1.00; // € per GB RAM
-    const pricePerGBDisk = 0.10; // € per GB Disk
+    // Corrected Prices
+    const pricePerSlot = 0.10; // € per slot
+    const pricePerGBRam = 2.00; // € per GB RAM
+    const pricePerGBDisk = 0.50; // € per GB Disk
+
 
     // Fetch stored data
     const selectedGame = localStorage.getItem("selectedGame") || "Unknown Game";
-    const slots = localStorage.getItem("slots") || 0;
-    const ram = localStorage.getItem("ram") || 0;
-    const disk = localStorage.getItem("disk") || 0;
+    const slots = parseInt(localStorage.getItem("slots") || 0);
+    const ram = parseInt(localStorage.getItem("ram") || 0);
+    const disk = parseInt(localStorage.getItem("disk") || 0);
 
-    // Calculate total price
-    const totalPrice =
-      slots * pricePerSlot + ram * pricePerGBRam + disk * pricePerGBDisk;
+    const totalPrice = (slots * pricePerSlot) + (ram * pricePerGBRam) + (disk * pricePerGBDisk);
+    document.getElementById("totalPrice").innerText = `€${totalPrice.toFixed(2)}`;
+
 
     // Update UI with dynamic data
     document.getElementById("gameSummary").innerText = selectedGame;

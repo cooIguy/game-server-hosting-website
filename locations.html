@@ -6,28 +6,27 @@
   <title>Location Selection | GameServerHub</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* General Styles */
     body {
       font-family: Arial, sans-serif;
-      background-image: url('public/loc-bg.webp'); /* Set the background image */
-      background-size: cover; /* Cover the entire page */
-      background-position: center; /* Center the background image */
-      background-attachment: fixed; /* Make the background fixed when scrolling */
+      background-image: url('public/loc-bg.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: #333;
       margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
-      min-height: 100vh; /* Ensure the body takes full viewport height */
+      min-height: 100vh;
     }
 
     .container {
       max-width: 900px;
       margin: 0 auto;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.8); /* Light transparent background to make text more readable */
+      background-color: rgba(255, 255, 255, 0.8);
       border-radius: 8px;
-      flex-grow: 1; /* Ensure the content container takes the remaining space */
+      flex-grow: 1;
     }
 
     h2 {
@@ -36,47 +35,37 @@
       margin-bottom: 20px;
     }
 
-    /* Region Sections */
     .region {
       margin-bottom: 20px;
       background-color: #fff;
       padding: 15px;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      position: relative; /* Allow positioning of the arrow inside this container */
+      position: relative;
     }
 
-    .region h3 {
-      font-size: 1.3rem;
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-
-    /* Back Arrow */
     .back-arrow {
       position: absolute;
       top: 10px;
       left: 10px;
       font-size: 24px;
-      color: #2ecc71; /* Modern green color */
+      color: #2ecc71;
       cursor: pointer;
       transition: color 0.3s ease;
     }
 
     .back-arrow:hover {
-      color: #27ae60; /* Darker shade when hovered */
+      color: #27ae60;
     }
 
-    /* Single Row Layout for Locations */
     .location-row {
       display: flex;
-      justify-content: space-between; /* Apply space between to evenly space out the items */
+      justify-content: space-between;
       gap: 10px;
       margin-bottom: 10px;
-      flex-wrap: wrap; /* Allow wrapping for smaller screens */
+      flex-wrap: wrap;
     }
 
-    /* Location Elements */
     .location-element {
       display: flex;
       align-items: center;
@@ -85,7 +74,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s;
-      width: 22%; /* Adjust width to fit more in a row */
+      width: 22%;
       min-width: 120px;
     }
 
@@ -111,11 +100,11 @@
     .checkmark {
       margin-left: 10px;
       font-size: 1.2rem;
-      display: none; /* Hide by default */
+      display: none;
     }
 
     .location-element.selected .checkmark {
-      display: inline-block; /* Show checkmark for selected */
+      display: inline-block;
     }
 
     .location-element.disabled {
@@ -133,7 +122,6 @@
       color: #e74c3c;
     }
 
-    /* Next Button Section */
     .next-section {
       text-align: center;
       margin-top: 20px;
@@ -147,20 +135,18 @@
       border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      margin: 0 10px;
-      pointer-events: none; /* Disabled by default */
-      opacity: 0.5; /* Visually dimmed when disabled */
+      border: none;
     }
 
-    .next-button.enabled {
-      pointer-events: auto; /* Enable interaction */
-      opacity: 1; /* Full opacity when enabled */
+    .next-button:disabled {
+      background-color: #bdc3c7;
+      cursor: not-allowed;
+      opacity: 0.5;
     }
 
-    .next-button:hover {
+    .next-button:not(:disabled):hover {
       background-color: #27ae60;
     }
-
   </style>
 </head>
 <body>
@@ -169,16 +155,14 @@
 
     <!-- EUROPE (EU) -->
     <div class="region">
-      <div class="back-arrow" onclick="window.history.back();">&#8592;</div> <!-- Left Arrow -->
+      <div class="back-arrow" onclick="window.history.back();">&#8592;</div>
       <h3>EUROPE (EU)</h3>
       <div class="location-row">
-        <!-- Warsaw, POLAND (Enabled) -->
         <div class="location-element" data-location="Warsaw, POLAND">
           <img src="flags/pl.svg" alt="Poland Flag">
           <div class="location-name">Warsaw, POLAND</div>
           <span class="checkmark">&#10003;</span>
         </div>
-        <!-- Other locations are disabled -->
         <div class="location-element disabled" data-location="FFM / Eygelshoven, GER">
           <img src="flags/de.svg" alt="Germany Flag">
           <div class="location-name">FFM / Eygelshoven, GER</div>
@@ -194,75 +178,35 @@
       </div>
     </div>
 
-    <!-- Other regions (AMERICA, AUSTRALIA, ASIA) can be added here -->
-
-    <!-- Next Button Section -->
     <div class="next-section">
-      <a href="initconfig.html">
-        <button class="next-button" id="next-button" disabled>Next</button>
-      </a>
+      <button id="next-button" class="next-button" disabled>Next</button>
     </div>
   </div>
 
   <script>
-    // Handle location selection
     const locations = document.querySelectorAll('.location-element:not(.disabled)');
     const nextButton = document.getElementById('next-button');
 
     locations.forEach(location => {
       location.addEventListener('click', () => {
-        // If the location is already selected, deselect it
-        if (location.classList.contains('selected')) {
-          location.classList.remove('selected');
-          localStorage.removeItem('selectedLocation'); // Remove from localStorage
-        } else {
-          // Remove checkmarks from all locations
-          locations.forEach(loc => {
-            loc.classList.remove('selected');
-          });
-
-          // Add checkmark to the selected location
-          location.classList.add('selected');
-
-          const selectedLocation = location.getAttribute('data-location');
-          localStorage.setItem('selectedLocation', selectedLocation); // Store selected location
-        }
-
-        // Enable/Disable the Next button based on selection
-        updateNextButtonState();
+        // Deselect all locations
+        locations.forEach(loc => loc.classList.remove('selected'));
+        // Select the clicked location
+        location.classList.add('selected');
+        // Enable the "Next" button
+        nextButton.disabled = false;
       });
     });
 
-    function updateNextButtonState() {
-      const selectedLocation = localStorage.getItem('selectedLocation');
+    nextButton.addEventListener('click', () => {
+      const selectedLocation = document.querySelector('.location-element.selected');
       if (selectedLocation) {
-        nextButton.disabled = false; // Enable the button
-        nextButton.classList.add('enabled');
-        nextButton.style.pointerEvents = "auto"; // Allow clicking when enabled
-      } else {
-        nextButton.disabled = true; // Disable the button
-        nextButton.classList.remove('enabled');
-        nextButton.style.pointerEvents = "none"; // Prevent clicking when disabled
+        const locationName = selectedLocation.getAttribute('data-location');
+        localStorage.setItem('selectedLocation', locationName);
+        window.location.href = "initconfig.html";
       }
-    }
-
-    // Initially check if a location is selected from localStorage
-    updateNextButtonState();
-
-    // Fade-in effect on page load
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
     });
-
-    // Fade-out effect before navigating to another page
-    function navigateWithTransition(url) {
-      document.body.classList.add('page-transition');
-      setTimeout(() => {
-        window.location.href = url;
-      }, 500); // Adjust this time to match the transition duration
-    }
   </script>
   <script src="inject-header-footer.js" defer></script>
-
 </body>
 </html>
