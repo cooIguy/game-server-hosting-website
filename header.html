@@ -3,10 +3,16 @@
         <img src="public/game2.png" alt="GameServerHub Logo" class="game-logo" />
     </a>
     <nav class="game-nav">
-        <a href="#services" class="game-nav-link">Services</a>
+        <a href="services.html" class="game-nav-link">Services</a>
         <a href="#locations" class="game-nav-link">Locations</a>
         <a href="contact.html" class="game-nav-link">Contact</a>
-        <a href="login.html" class="game-nav-link login-link">Login</a> <!-- Link to login page -->
+        <a href="login.html" class="game-nav-link login-link" id="loginButton">Login</a>
+        
+        <!-- User Profile (Hidden by default) -->
+        <div id="userProfile" class="user-profile" style="display: none;">
+            <img id="userImage" class="user-image" src="" alt="User Profile">
+            <span id="userName"></span>
+        </div>
     </nav>
 </header>
 
@@ -17,16 +23,13 @@
         justify-content: space-between;
         align-items: center;
         background-color: #292940;
-        /* Dark background */
         padding: 20px 80px;
-        /* Increased horizontal padding */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         font-family: 'Poppins', sans-serif;
     }
 
     .game-logo {
         max-width: 200px;
-        /* Increased logo size */
         transition: transform 0.3s ease;
     }
 
@@ -34,39 +37,24 @@
         transform: scale(1.1);
     }
 
-    /* Header Navigation Alignment */
     .game-nav {
         display: flex;
         align-items: center;
-        /* Center align the text within the header */
         gap: 40px;
-        /* Space between navigation links */
     }
 
-    /* Updated Navigation Link Styling */
     .game-nav-link {
         color: #f5a623;
-        /* Light orange color */
         font-size: 18px;
-        /* Adjust font size as needed */
         text-decoration: none;
         font-weight: 500;
         position: relative;
-        display: inline-block;
-        /* Inline-block to allow better alignment control */
         padding: 6px 0;
-        /* Add vertical padding to balance the text */
         transition: color 0.3s ease;
-        line-height: 1;
-        /* Prevent extra line spacing */
-        vertical-align: middle;
-        /* Align with baseline correctly */
     }
-
 
     .game-nav-link:hover {
         color: #f39c12;
-        /* Slightly darker yellow/orange */
     }
 
     .game-nav-link::before {
@@ -74,17 +62,12 @@
         position: absolute;
         width: 0;
         height: 2px;
-        /* Thickness of the underline */
         background-color: #f39c12;
-        /* Underline color */
         bottom: 0;
-        /* Align underline exactly at the bottom */
         left: 50%;
         transform: translateX(-50%);
         transition: width 0.3s ease;
     }
-
-
 
     .game-nav-link:hover::before {
         width: 100%;
@@ -92,22 +75,57 @@
 
     .login-link {
         font-weight: bold;
-        /* Make the Login link stand out */
         color: #f5a623;
-        /* Light orange color */
         background-color: #292940;
-        /* Same dark background as header */
         padding: 12px 20px;
         border-radius: 6px;
         border: 1px solid #f5a623;
-        /* Border with same color as link */
         transition: background-color 0.3s, color 0.3s;
     }
 
     .login-link:hover {
         background-color: #f5a623;
-        /* Highlight on hover */
         color: #292940;
-        /* Dark text color on hover */
+    }
+
+    /* User Profile */
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+    }
+
+    .user-image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #f5a623;
     }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const userProfile = document.getElementById("userProfile");
+        const userImage = document.getElementById("userImage");
+        const userName = document.getElementById("userName");
+        const loginButton = document.getElementById("loginButton");
+
+        // Check if the user is logged in (stored in localStorage)
+        const userData = JSON.parse(localStorage.getItem("user"));
+
+        if (userData) {
+            // Show the user's profile
+            userImage.src = userData.picture;
+            userName.textContent = userData.name;
+
+            // Hide the login button and show the user profile
+            loginButton.style.display = "none";
+            userProfile.style.display = "flex";
+        } else {
+            // Make sure the user profile is hidden and login button is visible if no user is logged in
+            loginButton.style.display = "inline-block";
+            userProfile.style.display = "none";
+        }
+    });
+</script>
