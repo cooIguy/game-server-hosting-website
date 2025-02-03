@@ -79,25 +79,37 @@
   </div>
 
   <script>
-    function handleCredentialResponse(response) {
-        fetch('/auth/google', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token: response.credential })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.user) {
-                // Store user information in localStorage
-                localStorage.setItem("user", JSON.stringify({
-                    name: data.user.name,
-                    picture: data.user.picture
-                }));
-                window.location.href = "index.html"; // Redirect after successful login
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
+function handleCredentialResponse(response) {
+    // Send the token to the server for verification and session creation
+    fetch('/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: response.credential })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            // Store user information in localStorage
+            localStorage.setItem("user", JSON.stringify({
+                name: data.user.name,
+                picture: data.user.picture
+            }));
+            
+            // Show alert informing the user they are logged in
+            alert("You are now logged in as " + data.user.name);
+            
+            // Redirect after successful login
+            window.location.href = "index.html";
+        } else {
+            console.error('Login failed: ', data.message);
+            // Optionally show an error message to the user here
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle any errors that occur during the fetch request
+    });
+}
 
     window.onload = function () {
         google.accounts.id.initialize({

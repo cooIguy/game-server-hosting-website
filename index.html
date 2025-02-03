@@ -211,12 +211,41 @@
     }
 
     /* Additional Styles for User Trust */
+
     .hero {
       text-align: center;
       padding: 80px 20px;
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('public/hero-bg.jpg') no-repeat center center;
+      background: url('public/index.gif') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
       background-size: cover;
       color: #fff;
+      position: relative;
+      /* Make sure the overlay is positioned correctly */
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      /* Make sure the overlay is hidden initially */
+      z-index: 1;
+    }
+
+    .hero:hover::after {
+      opacity: 1;
+      /* Show the dark overlay on hover */
+    }
+
+    .hero h2,
+    .hero p {
+      position: relative;
+      z-index: 2;
+      /* Ensure text is on top of the overlay */
     }
 
     .cta-button {
@@ -228,6 +257,8 @@
       cursor: pointer;
       border-radius: 8px;
       transition: background-color 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
 
     .cta-button:hover {
@@ -306,7 +337,6 @@
 </head>
 
 <body>
-
   <!-- Hero Section -->
   <div class="hero">
     <h2>Host Your Games with Ease</h2>

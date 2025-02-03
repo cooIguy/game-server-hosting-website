@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Server Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+    }
+
+    /* Header Styling */
+    header {
+      background-color: #2f3a47;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: #f5a623;
+      font-size: 28px;
+      text-transform: uppercase;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      position: relative;
+      background: url('public/dashboard.gif') no-repeat center center fixed;
+      background-size: cover;
+      padding: 50px 20px;
+      overflow: hidden;
+    }
+
+    .main-content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+      opacity: 0;
+      transition: opacity 0.6s ease; /* Smooth transition */
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Server Management Section */
+    .server-management {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .server-card {
+      background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent background */
+      padding: 30px;
+      width: 280px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .server-card h3 {
+      font-family: 'Poppins', sans-serif;
+      color: #fff; /* White text */
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .server-card p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #ccc; /* Light gray text */
+    }
+
+    .server-card button {
+      background-color: #f39c12; /* Soft yellow/gold */
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .server-card button:hover {
+      background-color: #e67e22; /* Darker yellow on hover */
+      transform: translateY(-2px);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Add subtle animations for the cards */
+    .server-card {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .server-management .server-card:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    .server-management .server-card:nth-child(even) {
+      animation-delay: 0.4s;
+    }
+
+    /* Hover effect for fading */
+    .main-content:hover::before {
+      opacity: 1;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header>
+    <h1>Game Server Dashboard</h1>
+  </header>
+
+  <!-- Main Content Section -->
+  <div class="main-content">
+    <div class="server-management">
+      <div class="server-card">
+        <h3>Minecraft Server</h3>
+        <p>Status: Active</p>
+        <button>Manage</button>
+      </div>
+      <div class="server-card">
+        <h3>Project Zomboid Server</h3>
+        <p>Status: Inactive</p>
+        <button>Start</button>
+      </div>
+      <div class="server-card">
+        <h3>GTA RP Server</h3>
+        <p>Status: Active</p>
+        <button>Manage</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Script -->
+  <script src="inject-header-footer.js" defer></script>
+</body>
+
+</html>

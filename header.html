@@ -12,6 +12,7 @@
         <div id="userProfile" class="user-profile" style="display: none;">
             <img id="userImage" class="user-image" src="" alt="User Profile">
             <span id="userName"></span>
+            <button id="signOutButton" onclick="signOut()">Sign Out</button>
         </div>
     </nav>
 </header>
@@ -102,6 +103,20 @@
         border-radius: 50%;
         border: 2px solid #f5a623;
     }
+
+    .user-profile button {
+        background-color: #f5a623;
+        border: none;
+        padding: 8px 15px;
+        color: white;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .user-profile button:hover {
+        background-color: #f39c12;
+    }
 </style>
 
 <script>
@@ -128,4 +143,10 @@
             userProfile.style.display = "none";
         }
     });
+
+    // Sign out function
+    function signOut() {
+        localStorage.removeItem("user");
+        window.location.reload();
+    }
 </script>
