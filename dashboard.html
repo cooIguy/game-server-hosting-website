@@ -79,22 +79,66 @@
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
       text-align: center;
-      transition: all 0.3s ease;
+      transition: all 0.6s ease; /* Smooth transition for background */
       cursor: pointer;
       position: relative;
+      background-size: cover; /* Ensure the background image is resized */
+      background-position: center; /* Center the background image */
+      opacity: 1;
+      overflow: hidden;
     }
 
+    /* Game Card hover background effect with opacity fade */
+    .server-card:hover {
+      opacity: 1;
+    }
+
+    /* Specific card hover effect */
+    .server-card.minecraft {
+      background-image: url('public/minecraft.png');
+    }
+
+    .server-card.zomboid {
+      background-image: url('public/zomboid.jpg');
+    }
+
+    .server-card.gta {
+      background-image: url('public/gta.png');
+    }
+
+    /* Add smooth transitions on hover */
+    .server-card.minecraft:hover {
+      background-image: url('public/minecraft2.webp');
+      background-color: rgba(0, 0, 0, 0.8); /* Darker overlay on hover */
+      transition: background-image 0.6s ease-in-out, background-color 0.3s ease;
+    }
+
+    .server-card.zomboid:hover {
+      background-image: url('public/zomboid2.jpg');
+      background-color: rgba(0, 0, 0, 0.8); /* Darker overlay on hover */
+      transition: background-image 0.6s ease-in-out, background-color 0.3s ease;
+    }
+
+    .server-card.gta:hover {
+      background-image: url('public/gta2.jpg');
+      background-color: rgba(0, 0, 0, 0.8); /* Darker overlay on hover */
+      transition: background-image 0.6s ease-in-out, background-color 0.3s ease;
+    }
+
+    /* Add text shadow to text for better visibility */
     .server-card h3 {
       font-family: 'Poppins', sans-serif;
       color: #fff; /* White text */
       margin-bottom: 20px;
       font-size: 20px;
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); /* Text shadow for better visibility */
     }
 
     .server-card p {
       font-size: 16px;
       margin-bottom: 20px;
       color: #ccc; /* Light gray text */
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6); /* Text shadow for better visibility */
     }
 
     .server-card button {
@@ -156,17 +200,17 @@
   <!-- Main Content Section -->
   <div class="main-content">
     <div class="server-management">
-      <div class="server-card">
+      <div class="server-card minecraft">
         <h3>Minecraft Server</h3>
         <p>Status: Active</p>
         <button>Manage</button>
       </div>
-      <div class="server-card">
+      <div class="server-card zomboid">
         <h3>Project Zomboid Server</h3>
         <p>Status: Inactive</p>
         <button>Start</button>
       </div>
-      <div class="server-card">
+      <div class="server-card gta">
         <h3>GTA RP Server</h3>
         <p>Status: Active</p>
         <button>Manage</button>
