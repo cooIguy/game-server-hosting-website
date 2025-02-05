@@ -1,0 +1,187 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Server Hub</title>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    /* Import Orbitron Font */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Wavy Lines Container */
+    .container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      -webkit-box-reflect: below 2px linear-gradient(transparent, #0005);
+    }
+
+    .container .box {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(
+        45deg,
+        #00f376 10%,
+        transparent 10%,
+        transparent 50%,
+        #00f376 50%,
+        #00f376 60%,
+        transparent 60%,
+        transparent 100%
+      );
+      background-size: 40px 40px;
+      transform: rotate(calc(var(--i) * 90deg));
+      animation: animate 0.3s linear infinite;
+    }
+
+    @keyframes animate {
+      0% {
+        background-position: 0;
+      }
+      100% {
+        background-position: 40px;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      .container .box {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    @media only screen and (max-width: 480px) {
+      .container .box {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    /* Block-Revealing Effect */
+    .block-effect {
+      font-size: 3.5rem;
+      margin-top: 50px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .block-reveal {
+      --t: calc(var(--td) + var(--d));
+      color: transparent;
+      padding: 4px;
+      position: relative;
+      overflow: hidden;
+      display: block;
+      animation: revealBlock 0s var(--t) forwards;
+    }
+
+    .block-reveal::after {
+      content: '';
+      width: 0%;
+      height: 100%;
+      padding-bottom: 4px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #33ff00; /* Code green effect */
+      animation: revealingIn var(--td) var(--d) forwards, revealingOut var(--td) var(--t) forwards;
+    }
+
+    @keyframes revealBlock {
+      100% {
+        color: #fff;
+      }
+    }
+
+    @keyframes revealingIn {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    @keyframes revealingOut {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Smooth terminal text effect */
+    .code {
+      font-size: 1.5rem;
+      color: #33ff00;
+      margin-top: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: type 2s steps(200) 1s forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes type {
+      to {
+        width: 100%;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    .code span {
+      border-right: 3px solid #33ff00;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Wavy Lines -->
+  <div class="container">
+    <div class="box" style="--i:1;"></div>
+    <div class="box" style="--i:2;"></div>
+  </div>
+
+  <!-- Block-Revealing Effect: game, server, hub -->
+  <h1 class="block-effect" style="--td: 1.2s">
+    <div class="block-reveal" style="--bc: #4040bf; --d: .1s">game</div>
+    <div class="block-reveal" style="--bc: #bf4060; --d: .5s">server</div>
+    <div class="block-reveal" style="--bc: #4060bf; --d: 1s">hub</div>
+  </h1>
+
+  <script>
+    // Redirect to index.html after 3 seconds
+    setTimeout(function () {
+      window.location.href = 'index.html';
+    }, 4000);
+  </script>
+</body>
+</html>

@@ -11,13 +11,27 @@
     /* General Styles */
     body {
       font-family: 'Roboto', sans-serif;
-      background: url('public/init-bg.webp') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
       margin: 0;
       padding: 0;
+      position: relative;
+      color: #fff;
+      overflow-x: hidden;
     }
 
+    /* Background Image */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('public/initconfig.gif') no-repeat center center;
+      background-size: cover;
+      z-index: -1; /* Ensure background is behind content */
+    }
+
+    /* Container Style */
     .container {
       max-width: 800px;
       margin: 50px auto;
@@ -25,6 +39,8 @@
       background: rgba(0, 0, 0, 0.8);
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      z-index: 2; /* Ensure content is above the background */
+      position: relative;
     }
 
     h2 {
@@ -42,6 +58,7 @@
       margin-bottom: 30px;
       padding: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 3; /* Ensure cards are above the background */
     }
 
     .card:hover {
@@ -141,9 +158,19 @@
       outline: none;
       box-shadow: 0 0 10px #2ecc71;
     }
+
+    /* Header and Footer */
+    header, footer {
+      position: relative;
+      z-index: 3; /* Ensure header/footer is above the background */
+    }
   </style>
 </head>
 <body>
+  <header>
+    <!-- Your header content here -->
+  </header>
+
   <div class="container">
     <h2>Initialization Configuration</h2>
 
@@ -187,6 +214,11 @@
     <div class="next-button-container">
       <button class="next-button" id="nextButton">Proceed to Payment</button>
     </div>
+  </div>
+
+  <footer>
+    <!-- Your footer content here -->
+  </footer>
 
   <script>
     // Update slots progress bar and value
@@ -233,53 +265,41 @@
       // Redirect to payment page
       window.location.href = 'payment.html';
     });
-      // Fade-in effect on page load
-  window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-  });
 
-  // Fade-out effect before navigating to another page
-  function navigateWithTransition(url) {
-    document.body.classList.add('page-transition');
-    setTimeout(() => {
-      window.location.href = url;
-    }, 500); // Adjust this time to match the transition duration
-  }
+    // Update price based on selections
+    function updatePrice() {
+      const slots = parseInt(slotSlider.value);
+      const ram = parseInt(ramSlider.value);
+      const disk = parseInt(diskSlider.value);
 
-  function updatePrice() {
-    const slots = parseInt(slotSlider.value);
-    const ram = parseInt(ramSlider.value);
-    const disk = parseInt(diskSlider.value);
+      const slotPrice = slots * 0.10;
+      const ramPrice = ram * 2;
+      const diskPrice = disk * 0.50;
+      const total = slotPrice + ramPrice + diskPrice;
 
-    const slotPrice = slots * 0.10;
-    const ramPrice = ram * 2;
-    const diskPrice = disk * 0.50;
-    const total = slotPrice + ramPrice + diskPrice;
+      document.getElementById('totalPrice').innerText = `$${total.toFixed(2)}`;
+    }
 
-    document.getElementById('totalPrice').innerText = `$${total.toFixed(2)}`;
-  }
+    // Attach updatePrice to input events
+    slotSlider.oninput = function () {
+      slotValue.innerHTML = this.value;
+      progressBar.style.width = (this.value / 500) * 100 + '%';
+      updatePrice();
+    };
 
-  // Attach updatePrice to input events
-  slotSlider.oninput = function () {
-    slotValue.innerHTML = this.value;
-    progressBar.style.width = (this.value / 500) * 100 + '%';
+    ramSlider.oninput = function () {
+      ramValue.innerHTML = this.value;
+      updatePrice();
+    };
+
+    diskSlider.oninput = function () {
+      diskValue.innerHTML = this.value;
+      updatePrice();
+    };
+
+    // Initialize price on page load
     updatePrice();
-  };
+  </script>
 
-  ramSlider.oninput = function () {
-    ramValue.innerHTML = this.value;
-    updatePrice();
-  };
-
-  diskSlider.oninput = function () {
-    diskValue.innerHTML = this.value;
-    updatePrice();
-  };
-
-  // Initialize price on page load
-  updatePrice();
-</script>
-
-  
 </body>
 </html>
