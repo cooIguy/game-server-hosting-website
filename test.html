@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sign-In</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div id="g_id_onload"
+         data-client_id="516967938738-pj7u4d9p168d34ghm875i1e5gm3gi7mo.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <h2 id="user-name" style="display:none;"></h2>
+
+    <script>
+        function parseJwt(token) {
+            let base64Url = token.split('.')[1]; // Get payload
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Decode base64
+            let jsonPayload = decodeURIComponent(atob(base64).split('').map(c =>
+                '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+            ).join(''));
+
+            return JSON.parse(jsonPayload);
+        }
+
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+            let userData = parseJwt(response.credential);
+            
+            // Display the user's name
+            let userNameElement = document.getElementById("user-name");
+            userNameElement.innerText = `Hello, ${userData.name}!`;
+            userNameElement.style.display = "block";
+        }
+    </script>
+</body>
+</html>

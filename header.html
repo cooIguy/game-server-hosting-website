@@ -15,6 +15,9 @@
             <button id="signOutButton" onclick="signOut()">Sign Out</button>
         </div>
     </nav>
+    
+    <!-- Debugging: Login Status (Now positioned on the far right) -->
+    <div id="loginStatus" style="color: white; margin-left: 20px; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 14px;"></div>
 </header>
 
 <style>
@@ -27,6 +30,7 @@
         padding: 20px 80px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         font-family: 'Poppins', sans-serif;
+        position: relative; /* Needed for absolute positioning of loginStatus */
     }
 
     .game-logo {
@@ -120,33 +124,33 @@
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const userProfile = document.getElementById("userProfile");
-        const userImage = document.getElementById("userImage");
-        const userName = document.getElementById("userName");
-        const loginButton = document.getElementById("loginButton");
+  window.onload = function() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const loginStatusDiv = document.getElementById("loginStatus");
 
-        // Check if the user is logged in (stored in localStorage)
-        const userData = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+        console.log("User logged in:", user);
+        // User is logged in, show the profile and hide the login button
+        document.getElementById("loginButton").style.display = "none"; // Hide Login button
+        document.getElementById("userProfile").style.display = "flex"; // Show user profile
 
-        if (userData) {
-            // Show the user's profile
-            userImage.src = userData.picture;
-            userName.textContent = userData.name;
+        // Set user details in the profile section
+        document.getElementById("userImage").src = user.picture;
+        document.getElementById("userName").textContent = user.name;
 
-            // Hide the login button and show the user profile
-            loginButton.style.display = "none";
-            userProfile.style.display = "flex";
-        } else {
-            // Make sure the user profile is hidden and login button is visible if no user is logged in
-            loginButton.style.display = "inline-block";
-            userProfile.style.display = "none";
-        }
-    });
-
-    // Sign out function
-    function signOut() {
-        localStorage.removeItem("user");
-        window.location.reload();
+        // Update login status label
+        loginStatusDiv.textContent = "User logged in: true"; 
+    } else {
+        console.log("No user found in localStorage.");
+        loginStatusDiv.textContent = "User logged in: false"; 
     }
+  }
+
+  function signOut() {
+    // Clear user data from localStorage
+    localStorage.removeItem("user");
+
+    // Redirect to the login page
+    window.location.href = "login.html";
+  }
 </script>
